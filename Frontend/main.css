@@ -48,6 +48,7 @@ body {
     opacity: 1;
     animation: fadeIn 1s ease-in forwards;
     transition: opacity 3s ease-in-out;
+    z-index: 10002;
 }
 
 /* Studio Logo - Loading Screen */
@@ -56,12 +57,12 @@ body {
     height: auto;
     max-width: 80vw;
     object-fit: contain;
+    opacity: 1;
+    transform: scale(1);
 }
 
-/* Studio Logo Breathing Animation */
-.loading-background .studio-logo.breathing {
-    animation: breathe 3s ease-in-out infinite;
-}
+/* Studio Logo Breathing Animation - REMOVED */
+/* .studio-logo.breathing removed to make logo static */
 
 /* Game Logo Container */
 .game-logo-container {
@@ -75,7 +76,7 @@ body {
 
 /* Game Logo - Loading Screen */
 .loading-background .game-logo {
-    width: 65vw;
+    width: 50vw;
     height: auto;
     max-width: 95vw;
     object-fit: contain;
@@ -125,7 +126,7 @@ body {
     animation: loadProgress 3s ease-in-out forwards;
 }
 
-/* Breathing Animation */
+/* Breathing Animation - For Game Logo Only */
 .breathing {
     animation: breathe 3s ease-in-out infinite;
 }
@@ -151,17 +152,8 @@ body {
     to { opacity: 0; }
 }
 
-/* Enhanced breathing animation like example game */
-@keyframes logoBreathing {
-    0%, 100% { 
-        transform: scale(1);
-        opacity: 0.9;
-    }
-    50% { 
-        transform: scale(1.1);
-        opacity: 1;
-    }
-}
+/* Enhanced breathing animation - REMOVED */
+/* @keyframes logoBreathing removed to make logos static */
 
 @keyframes loadProgress {
     0% { clip-path: inset(0 100% 0 0); }

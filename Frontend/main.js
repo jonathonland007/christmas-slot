@@ -4854,24 +4854,13 @@ async function initializeGame() {
         const gameLogo = document.getElementById('game-logo');
         console.log('🔍 Game logo container:', gameLogo);
         
-        // Force enhanced breathing animation on game logo
+        // Game logo keeps breathing animation (restored)
         const gameLogoImg = gameLogo.querySelector('.game-logo');
         console.log('🔍 Game logo IMG element:', gameLogoImg);
         
         if (gameLogoImg) {
-            // Apply enhanced breathing animation with inline styles for reliability
-            gameLogoImg.style.animation = 'logoBreathing 3s ease-in-out infinite';
-            gameLogoImg.style.transformOrigin = 'center center';
-            gameLogoImg.style.animationFillMode = 'both';
-            
-            console.log('✅ Applied enhanced breathing animation to game logo');
-            console.log('🔍 Game logo computed style animation:', window.getComputedStyle(gameLogoImg).animation);
-            
-            // Test manual transform as fallback
-            setTimeout(() => {
-                gameLogoImg.style.transform = 'scale(1.1)';
-                console.log('🔄 Testing manual scale transform');
-            }, 1000);
+            // Game logo will use CSS breathing animation
+            console.log('✅ Game logo will use breathing animation from CSS');
         } else {
             console.error('❌ Could not find .game-logo image element');
         }
@@ -4884,7 +4873,7 @@ async function initializeGame() {
         console.log('🏢 Studio logo breathing for 5 seconds...');
         await sleep(5000);
         
-        // Fade out studio logo smoothly with animation
+        // Fade out studio logo smoothly
         console.log('🎭 Fading out studio logo...');
         document.getElementById('studio-logo').style.animation = 'fadeOut 3s ease-in-out forwards';
         await sleep(3000); // Wait for full fade to complete
