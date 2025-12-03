@@ -30,3 +30,13 @@ build/
 
 # Log files
 *.log
+
+# Ignore everything except Frontend folder
+/*
+!/Frontend/
+!/.gitignore
+!/README.md
+
+# Explicitly ignore these folders
+/math/
+/STAKE GUIDELINES/

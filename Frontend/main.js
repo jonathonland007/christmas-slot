@@ -285,7 +285,7 @@ function initVisualDebug() {
 function addDebugToggleButton() {
     const toggleButton = document.createElement('button');
     toggleButton.id = 'visual-debug-toggle';
-    toggleButton.innerHTML = '🎨';
+    toggleButton.textContent = '🎨';
     toggleButton.style.cssText = `
         position: fixed;
         top: 1vh;
@@ -333,7 +333,7 @@ function toggleVisualDebug() {
         addCenterDots();
         showElementInfo();
         if (toggleButton) {
-            toggleButton.innerHTML = '🔴';
+            toggleButton.textContent = '🔴';
             toggleButton.style.borderColor = '#FF0000';
         }
         console.log('🟢 Visual Debug: ENABLED - All elements now have colored borders and center dots');
@@ -342,7 +342,7 @@ function toggleVisualDebug() {
         removeCenterDots();
         hideElementInfo();
         if (toggleButton) {
-            toggleButton.innerHTML = '🎨';
+            toggleButton.textContent = '🎨';
             toggleButton.style.borderColor = '#FFD700';
         }
         console.log('🔴 Visual Debug: DISABLED - Visual aids removed');
@@ -708,7 +708,7 @@ function enableBonusButtons() {
     if (bonusBuyBtn) {
         const buttonText = bonusBuyBtn.querySelector('.button-text');
         if (buttonText) {
-            buttonText.innerHTML = 'BONUS';
+            buttonText.textContent = 'BONUS';
         }
     }
     
@@ -779,9 +779,11 @@ let bonusGameState = {
 
 // Centralized API call function (matches example implementation)
 async function apiCall(endpoint, data) {
-    console.log('🎯 === API CALL INTERCEPTED ===');
-    console.log('🎯 Endpoint:', endpoint);
-    console.log('🎯 Data:', data);
+    if (MASTER_DEBUG) {
+        console.log('🎯 === API CALL INTERCEPTED ===');
+        console.log('🎯 Endpoint:', endpoint);
+        console.log('🎯 Data:', data);
+    }
     
     try {
         const response = await fetch(`${gameState.rgsUrl}${endpoint}`, {
@@ -794,15 +796,21 @@ async function apiCall(endpoint, data) {
         
         const result = await response.json();
         
-        console.log('🎯 === API RESPONSE RECEIVED ===');
-        console.log('🎯 Response for', endpoint + ':');
-        console.log('🎯 Full result:', result);
-        if (result.round) {
-            console.log('🎯 EVENT ID CHECK - result.round.id:', result.round.id);
-            console.log('🎯 EVENT ID CHECK - result.round.eventId:', result.round.eventId);
+        if (MASTER_DEBUG) {
+            console.log('🎯 === API RESPONSE RECEIVED ===');
+            console.log('🎯 Response for', endpoint + ':');
+            console.log('🎯 Full result:', result);
         }
-        console.log('🎯 EVENT ID CHECK - result.eventId:', result.eventId);
-        console.log('🎯 EVENT ID CHECK - result.id:', result.id);
+        if (result.round) {
+            if (MASTER_DEBUG) {
+                console.log('🎯 EVENT ID CHECK - result.round.id:', result.round.id);
+                console.log('🎯 EVENT ID CHECK - result.round.eventId:', result.round.eventId);
+            }
+        }
+        if (MASTER_DEBUG) {
+            console.log('🎯 EVENT ID CHECK - result.eventId:', result.eventId);
+            console.log('🎯 EVENT ID CHECK - result.id:', result.id);
+        }
         
         if (!response.ok) {
             throw new Error(`API Error: ${result.error || response.statusText}`);
@@ -810,8 +818,11 @@ async function apiCall(endpoint, data) {
         
         return result;
     } catch (error) {
-        console.error('💥 API CALL FAILED:', error);
-        showError(`Error: ${error.message}`);
+        console.error('API call failed');
+        showError('Unable to connect. Please try again.');
+        if (MASTER_DEBUG) {
+            console.error('Debug - Error details:', error);
+        }
         throw error;
     }
 }
@@ -879,18 +890,22 @@ function getURLParams() {
 async function fetchReplayData() {
     const { game, version, mode, event, rgsUrl } = gameState.replayParams;
     
-    console.log('🎬 [REPLAY INVESTIGATION] === FETCHING REPLAY DATA ===');
-    console.log('🎬 [REPLAY INVESTIGATION] Game ID:', game);
-    console.log('🎬 [REPLAY INVESTIGATION] Version:', version);
-    console.log('🎬 [REPLAY INVESTIGATION] Mode:', mode);
-    console.log('🎬 [REPLAY INVESTIGATION] Event ID (CRITICAL):', event);
-    console.log('🎬 [REPLAY INVESTIGATION] RGS URL:', rgsUrl);
+    if (MASTER_DEBUG) {
+        console.log('🎬 [REPLAY INVESTIGATION] === FETCHING REPLAY DATA ===');
+        console.log('🎬 [REPLAY INVESTIGATION] Game ID:', game);
+        console.log('🎬 [REPLAY INVESTIGATION] Version:', version);
+        console.log('🎬 [REPLAY INVESTIGATION] Mode:', mode);
+        console.log('🎬 [REPLAY INVESTIGATION] Event ID (CRITICAL):', event);
+        console.log('🎬 [REPLAY INVESTIGATION] RGS URL:', rgsUrl);
+    }
     
     // Construct replay endpoint URL
     const url = `${rgsUrl}/bet/replay/${game}/${version}/${mode}/${event}`;
     
-    console.log('🎬 [REPLAY INVESTIGATION] Full URL being called:', url);
-    console.log('🎬 [REPLAY INVESTIGATION] Expected URL format: {rgsUrl}/bet/replay/{game}/{version}/{mode}/{event}');
+    if (MASTER_DEBUG) {
+        console.log('🎬 [REPLAY INVESTIGATION] Full URL being called:', url);
+        console.log('🎬 [REPLAY INVESTIGATION] Expected URL format: {rgsUrl}/bet/replay/{game}/{version}/{mode}/{event}');
+    }
     
     try {
         const response = await fetch(url, {
@@ -915,7 +930,10 @@ async function fetchReplayData() {
         
         return result;
     } catch (error) {
-        console.error(`💥 Error fetching replay data: ${error.message}`);
+        console.error('Failed to fetch replay data');
+        if (MASTER_DEBUG) {
+            console.error('Debug - Error details:', error.message);
+        }
         throw error;
     }
 }
@@ -944,8 +962,11 @@ async function authenticateSession() {
             await initReplayMode();
             return true;
         } catch (error) {
-            console.error(`Replay initialization failed: ${error.message}`);
-            showError(`Replay initialization failed: ${error.message}`);
+            console.error('Replay initialization failed');
+            showError('Unable to initialize replay mode. Please try again.');
+            if (MASTER_DEBUG) {
+                console.error('Debug - Error details:', error.message);
+            }
             return false;
         }
     }
@@ -954,8 +975,8 @@ async function authenticateSession() {
     gameState.sessionID = params.sessionID;
     gameState.rgsUrl = params.rgsUrl;
     
-    console.log(`Session ID: ${gameState.sessionID}`);
-    console.log(`RGS URL: ${gameState.rgsUrl}`);
+    console.log('Session authentication initialized');
+    console.log('RGS connection established');
     
     if (!gameState.sessionID) {
         console.error('❌ No session ID provided');
@@ -965,7 +986,7 @@ async function authenticateSession() {
 
     try {
         console.log("Authenticating session...");
-        console.log(`Making request to: ${gameState.rgsUrl}/wallet/authenticate`);
+        console.log('Connecting to wallet service');
         
         // Use the centralized apiCall function (matching example)
         const result = await apiCall("/wallet/authenticate", {
@@ -992,8 +1013,11 @@ async function authenticateSession() {
         return true;
         
     } catch (error) {
-        console.error(`Authentication failed: ${error.message}`);
-        showError(`Authentication failed: ${error.message}`);
+        console.error('Authentication failed');
+        showError('Unable to authenticate. Please check your connection and try again.');
+        if (MASTER_DEBUG) {
+            console.error('Debug - Error details:', error.message);
+        }
         return false;
     }
 }
@@ -5584,6 +5608,47 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     console.log('✅ INFO and SOUND button initialization complete');
+    
+    // Add event delegation for data-action attributes (security improvement)
+    document.addEventListener('click', function(e) {
+        const target = e.target.closest('[data-action]');
+        if (!target) return;
+        
+        const action = target.getAttribute('data-action');
+        
+        switch(action) {
+            case 'hide-game-info':
+                hideGameInfoPopup();
+                break;
+            case 'hide-bonus-buy':
+                hideBonusBuyPopup();
+                break;
+            case 'hide-bonus-confirmation':
+                hideBonusBuyConfirmation();
+                break;
+            case 'confirm-bonus-purchase':
+                confirmBonusPurchase();
+                break;
+        }
+    });
+    
+    // Add event delegation for tab switching
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('info-tab') && e.target.hasAttribute('data-tab')) {
+            const tabName = e.target.getAttribute('data-tab');
+            switchInfoTab(tabName);
+        }
+    });
+    
+    // Handle bonus buy panel backdrop clicks
+    const bonusBuyPanel = document.getElementById('bonus-buy-panel');
+    if (bonusBuyPanel) {
+        bonusBuyPanel.addEventListener('click', function(e) {
+            if (e.target === bonusBuyPanel && bonusBuyPanel.getAttribute('data-close-on-backdrop') === 'true') {
+                hideBonusBuyPopup();
+            }
+        });
+    }
 });
 
 // Make functions globally available

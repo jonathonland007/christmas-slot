@@ -6,10 +6,11 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://*.stake-engine.com https://api.stake-engine.com; media-src 'self';">
     <title>Christmas Magic Lines - Festive Slot Game</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&display=swap" rel="stylesheet" crossorigin="anonymous">
 
   <script type="module" crossorigin src="./main.js?v=6"></script>
   <link rel="stylesheet" crossorigin href="./main.css?v=6">
@@ -244,12 +245,12 @@
 
         <!-- Game Info Popup -->
         <div id="game-info-popup" class="info-popup-overlay" style="display: none;">
-            <div class="popup-backdrop" onclick="hideGameInfoPopup()"></div>
+            <div class="popup-backdrop" data-action="hide-game-info"></div>
             <div class="game-info-container">
                 <img src="./assets/Settings-Pop-Up.png" alt="Game Info Background" class="info-popup-bg">
                 
                 <!-- Close Button -->
-                <div class="info-close-btn" onclick="hideGameInfoPopup()">
+                <div class="info-close-btn" data-action="hide-game-info">
                     <img src="./assets/Green Exit Button Normal.png" alt="Close"
                          onmouseover="this.src='./assets/Green Exit Button Hover.png'"
                          onmouseout="this.src='./assets/Green Exit Button Normal.png'">
@@ -257,9 +258,9 @@
                 
                 <!-- Tab Navigation -->
                 <div class="info-tabs">
-                    <button class="info-tab active" onclick="switchInfoTab('symbols')">Symbols</button>
-                    <button class="info-tab" onclick="switchInfoTab('paylines')">Win Lines</button>
-                    <button class="info-tab" onclick="switchInfoTab('rules')">Rules</button>
+                    <button class="info-tab active" data-tab="symbols">Symbols</button>
+                    <button class="info-tab" data-tab="paylines">Win Lines</button>
+                    <button class="info-tab" data-tab="rules">Rules</button>
                 </div>
                 
                 <!-- Tab Content -->
@@ -459,7 +460,7 @@
         </div>
 
         <!-- Bonus Buy Panel -->
-        <div id="bonus-buy-panel" class="popup-overlay" style="display: none;" onclick="event.target === this && hideBonusBuyPopup()">
+        <div id="bonus-buy-panel" class="popup-overlay" style="display: none;" data-close-on-backdrop="true">
             <div class="popup-content bonus-buy-popup">
                 <img src="./assets/Settings-Pop-Up.png" alt="Bonus Buy Background" class="bonus-buy-background">
                 <img src="./assets/Green Exit Button Normal.png" 
@@ -467,7 +468,7 @@
                      class="popup-exit-button"
                      onmouseover="this.src='./assets/Green Exit Button Hover.png'"
                      onmouseout="this.src='./assets/Green Exit Button Normal.png'"
-                     onclick="hideBonusBuyPopup()" alt="Close">
+                     data-action="hide-bonus-buy" alt="Close">
                 
                 <div class="bonus-buy-content">
                     
@@ -513,7 +514,7 @@
                      class="popup-exit-button"
                      onmouseover="this.src='./assets/Green Exit Button Hover.png'"
                      onmouseout="this.src='./assets/Green Exit Button Normal.png'"
-                     onclick="hideBonusBuyConfirmation()" alt="Close">
+                     data-action="hide-bonus-confirmation" alt="Close">
                 
                 <div class="confirmation-content">
                     <div class="confirmation-message">
@@ -527,10 +528,10 @@
                     </div>
                     
                     <div class="confirmation-buttons">
-                        <button class="confirm-btn purchase-btn" onclick="confirmBonusPurchase()">
+                        <button class="confirm-btn purchase-btn" data-action="confirm-bonus-purchase">
                             GET BONUS
                         </button>
-                        <button class="confirm-btn cancel-btn" onclick="hideBonusBuyConfirmation()">
+                        <button class="confirm-btn cancel-btn" data-action="hide-bonus-confirmation">
                             CANCEL
                         </button>
                     </div>
