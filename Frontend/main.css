@@ -1,0 +1,3029 @@
+/* Christmas Magic Lines - Main Stylesheet */
+/* Viewport-based responsive design using vw/vh units */
+
+/* CSS Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Fredoka One', Arial, sans-serif;
+    background: linear-gradient(135deg, #0d4f3c, #1a5f4e, #2d6e5f);
+    color: #fff;
+    font-weight: bold;
+    -webkit-text-stroke: 0.02vw rgba(0, 0, 0, 0.6);
+    text-stroke: 0.02vw rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Loading Background */
+.loading-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('./assets/Background.png') center/cover;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4vh;
+}
+
+/* Studio Logo Container */
+.studio-logo-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    animation: fadeIn 1s ease-in forwards;
+    transition: opacity 3s ease-in-out;
+}
+
+/* Studio Logo - Loading Screen */
+.loading-background .studio-logo {
+    width: 45vw;
+    height: auto;
+    max-width: 80vw;
+    object-fit: contain;
+}
+
+/* Studio Logo Breathing Animation */
+.loading-background .studio-logo.breathing {
+    animation: breathe 3s ease-in-out infinite;
+}
+
+/* Game Logo Container */
+.game-logo-container {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    animation: fadeIn 1s ease-in forwards;
+}
+
+/* Game Logo - Loading Screen */
+.loading-background .game-logo {
+    width: 65vw;
+    height: auto;
+    max-width: 95vw;
+    object-fit: contain;
+}
+
+/* Breathing Animation for Loading Screen */
+.loading-background .game-logo.breathing {
+    animation: breathe 3s ease-in-out infinite;
+}
+
+/* Loading Bar Container */
+.loader-container {
+    position: absolute;
+    bottom: 20vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40vw;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-container.hidden {
+    display: none;
+}
+
+.loading-bar-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.load-bar-empty,
+.load-bar-full,
+.load-bar-mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.load-bar-full {
+    clip-path: inset(0 70% 0 0);
+    animation: loadProgress 3s ease-in-out forwards;
+}
+
+/* Breathing Animation */
+.breathing {
+    animation: breathe 3s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% { 
+        transform: scale(1); 
+        opacity: 0.9;
+    }
+    50% { 
+        transform: scale(1.05); 
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Enhanced breathing animation like example game */
+@keyframes logoBreathing {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 0.9;
+    }
+    50% { 
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+@keyframes loadProgress {
+    0% { clip-path: inset(0 100% 0 0); }
+    100% { clip-path: inset(0 0% 0 0); }
+}
+
+/* Snow Overlay - Continuous Effect */
+#snow-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.8;
+    mix-blend-mode: screen;
+}
+
+
+
+/* Bonus Transition - Fade Effect */
+.bonus-fade-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.bonus-fade-transition.fade-in {
+    opacity: 1;
+}
+
+.bonus-fade-transition.fade-out {
+    opacity: 0;
+}
+
+/* Game Container */
+.game-container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+/* Replay Mode Indicator */
+.replay-indicator {
+    position: absolute;
+    top: 2vh;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    padding: 1vh 2vw;
+    border-radius: 1vw;
+    font-size: 2vw;
+    font-weight: bold;
+    z-index: 1000;
+    animation: pulseOpacity 1s infinite;
+}
+
+@keyframes pulseOpacity {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Slot Machine Container */
+.slot-machine {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Game Header */
+.game-header {
+    position: absolute;
+    top: 2vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+}
+
+.main-logo {
+    width: 40vw;
+    height: auto;
+    max-width: 50vw;
+    object-fit: contain;
+}
+
+/* Christmas Background */
+.game-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+.background-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Fir Trees - Top */
+.fir-trees-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 30vh;
+    z-index: 5; /* Above reels (z-index: 3) */
+}
+
+/* Top Fir Trees */
+.fir-up-left-1 {
+    position: absolute;
+    top: 0;
+    right: 87.5vw;
+    width: 15vw;
+    height: auto;
+
+}
+
+.fir-up-left-2 {
+    position: absolute;
+    top: -5vh;
+    right: 50vw;
+    width: 45vw;
+    height: auto;
+    transform: scaleY(0.4);
+}
+
+.fir-up-right-2 {
+    position: absolute;
+    top: -5vh;
+    left: 50vw;
+    width: 45vw;
+    height: auto;
+    transform: scaleY(0.4);
+}
+
+.fir-up-middle {
+    position: absolute;
+    top: -10vh;
+    left: 50%;
+    transform: translateX(-50%) scaleY(0.4);
+    width: 50vw;
+    height: auto;
+    z-index: 6;
+}
+
+.fir-up-right-1 {
+    position: absolute;
+    top: 0;
+    left: 87.5vw;
+    width: 15vw;
+    height: auto;
+
+}
+
+.fir-shadow-up {
+    position: absolute;
+    top: 25vh;
+    left: 0;
+    width: 100%;
+    height: 5vh;
+    object-fit: cover;
+}
+
+/* Game Area */
+.game-area {
+    position: absolute;
+    top: 30vh;
+    left: 0;
+    width: 100vw;
+    height: 25vh;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Reel Section - Frame images with symbol overlay */
+.reel-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90vw;
+    height: 60vh;
+}
+
+.reel-section .frame-image {
+    height: 60vh;
+    width: auto;
+    display: block;
+    margin: 0;
+}
+
+/* Basic Symbol Display System */
+.symbol-display {
+    position: absolute;
+    width: 10vw;
+    height: 16vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 10;
+    /* REMOVED: transition: all 0.3s ease; - caused jerky flashing with winning animations */
+}
+
+/* Multiplier Overlay for Symbol Multipliers */
+.multiplier-overlay {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: linear-gradient(45deg, #FF4444, #CC0000);
+    color: #FFFFFF;
+    border: 4px solid #FFFFFF;
+    border-radius: 50%;
+    width: 5vw;
+    height: 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2vw;
+    font-weight: 900;
+    z-index: 9999;
+    box-shadow: 0 0 20px rgba(255, 68, 68, 1.0), 0 0 40px rgba(255, 68, 68, 0.6);
+    -webkit-text-stroke: 0.08vw rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 1.0);
+    font-family: 'Fredoka One', Arial, sans-serif;
+    animation: multiplierPulse 2s infinite ease-in-out;
+}
+
+/* Multiplier on winning symbols should glow brighter */
+.winning .multiplier-overlay,
+.winning-symbol .multiplier-overlay,
+.winning-animated .multiplier-overlay {
+    animation: multiplierWinPulse 0.8s infinite ease-in-out;
+    box-shadow: 0 0 30px rgba(255, 68, 68, 1.0), 0 0 60px rgba(255, 68, 68, 0.8);
+    transform: scale(1.1);
+}
+
+/* Enhanced pulse for winning multipliers */
+@keyframes multiplierWinPulse {
+    0%, 100% { 
+        transform: scale(1.1);
+        box-shadow: 0 0 30px rgba(255, 68, 68, 1.0), 0 0 60px rgba(255, 68, 68, 0.8);
+    }
+    50% { 
+        transform: scale(1.2);
+        box-shadow: 0 0 40px rgba(255, 68, 68, 1.0), 0 0 80px rgba(255, 68, 68, 1.0);
+    }
+}
+
+/* Multiplier pulse animation for visibility */
+@keyframes multiplierPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Fir Trees - Bottom */
+.fir-trees-bottom {
+    position: absolute;
+    bottom: 18vh; /* Above control panel */
+    left: 0;
+    width: 100%;
+    height: 30vh;
+    z-index: 5; /* Above reels (z-index: 3) */
+}
+
+/* Bottom Fir Trees */
+.fir-bottom-left-1 {
+    position: absolute;
+    bottom: 0;
+    right: 87.5vw;
+    width: 15vw;
+    height: auto;
+
+}
+
+.fir-bottom-left-2 {
+    position: absolute;
+    bottom: -5vh;
+    right: 50vw;
+    width: 45vw;
+    height: auto;
+    transform: scaleY(0.4);
+}
+
+.fir-bottom-right-2 {
+    position: absolute;
+    bottom: -5vh;
+    left: 50vw;
+    width: 45vw;
+    height: auto;
+    transform: scaleX(-1) scaleY(0.4);
+}
+
+.fir-bottom-middle {
+    position: absolute;
+    bottom: -10vh;
+    left: 50%;
+    transform: translateX(-50%) scaleY(0.4);
+    width: 50vw;
+    height: auto;
+    z-index: 6;
+}
+
+.fir-bottom-right-1 {
+    position: absolute;
+    bottom: 0;
+    left: 87.5vw;
+    width: 15vw;
+    height: auto;
+
+}
+
+
+
+.fir-shadow-bottom {
+    position: absolute;
+    bottom: 25vh;
+    left: 0;
+    width: 100%;
+    height: 5vh;
+    object-fit: cover;
+}
+
+/* Unified Horizontal UI Layout */
+.unified-horizontal-ui {
+    position: fixed;
+    bottom: 4vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0; /* Remove uniform gap - individual elements control spacing */
+    z-index: 100;
+}
+
+/* Bet Controls Group - Tight spacing */
+.bet-controls-group {
+    display: flex;
+    align-items: center;
+    gap: 0.05vw; /* Minimal gap for ultra-tight button placement */
+    margin-right: 2vw; /* Gap before action buttons */
+}
+
+/* Center Controls Group - Three Button Layout */
+.action-buttons-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    margin-right: 2vw; /* Gap before win display */
+}
+
+/* Bonus Buy Container - Positioned between TURBO and WIN */
+.bonus-buy-container {
+    display: flex;
+    align-items: center;
+    margin-right: 1vw; /* Smaller gap before info/sound buttons */
+}
+
+.bonus-buy-container .control-button {
+    width: 8vw;
+    height: 8vw;
+}
+
+.bonus-buy-container .button-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.action-buttons-group .control-button {
+    width: 8vw;
+    height: 8vw;
+    min-width: 6vw;
+    min-height: 6vh;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+.action-buttons-group .control-button:hover {
+    transform: scale(1.03);
+}
+
+.action-buttons-group .control-button:active {
+    transform: scale(0.97);
+}
+
+.action-buttons-group .control-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Bet Controls Disabled State - Same as action buttons */
+.bet-controls-group .control-button:disabled,
+#total-bet-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.action-buttons-group .button-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+
+
+.action-buttons-group .button-image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.action-buttons-group .button-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+    font-size: 1.8vw;
+    font-weight: bold;
+    font-family: 'Fredoka One', Arial, sans-serif;
+    text-shadow: 0.15vw 0.15vw 0.3vw rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* AutoPlay Button Specific Styling */
+.autoplay-button.active {
+    filter: brightness(1.2) saturate(1.3);
+}
+
+.autoplay-button.active .button-bg {
+    filter: hue-rotate(120deg) brightness(1.1);
+}
+
+/* Turbo Button Specific Styling */
+.turbo-button.active {
+    filter: brightness(1.2) saturate(1.3);
+}
+
+.turbo-button.active .button-bg {
+    filter: hue-rotate(60deg) brightness(1.1);
+}
+
+
+
+/* Clean Balance Container */
+.balance-container {
+    position: relative;
+    cursor: pointer;
+    margin-right: 0; /* No gap before minus button */
+}
+
+.balance-background {
+    width: 16vw;
+    height: 9vw;
+    max-width: 20vw;
+    max-height: 12vh;
+    display: block;
+    object-fit: contain;
+}
+
+.balance-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+}
+
+.balance-label {
+    font-size: 1.6vw;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 0.08vw 0.08vw 0.15vw rgba(0, 0, 0, 0.8);
+    margin-bottom: 0.15vh;
+    position: relative;
+    top: -4.5vh;
+}
+
+.balance-amount {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8vw;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 0.08vw 0.08vw 0.15vw rgba(0, 0, 0, 0.8);
+}
+
+/* Bonus Buy Button */
+.bonus-buy-button {
+    position: relative;
+}
+
+.bonus-buy-button .button-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8vw;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: 'Fredoka One', Arial, sans-serif;
+    text-shadow: 0.08vw 0.08vw 0.15vw rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.bonus-buy-button:hover .button-text {
+    color: #FFD700;
+}
+
+/* Last Win Container - Unique Classes */
+.last-win-container {
+    position: relative;
+    cursor: pointer;
+    margin-right: 2vw; /* Gap before bonus button */
+}
+
+.last-win-background {
+    width: 10vw;
+    height: 10vw;
+    min-width: 7vw;
+    min-height: 7vh;
+    display: block;
+}
+
+.last-win-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none;
+}
+
+.last-win-label {
+    font-size: 1.4vw;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: 'Fredoka One', Arial, sans-serif;
+    text-shadow: 0.08vw 0.08vw 0.15vw rgba(0, 0, 0, 0.8);
+    margin-bottom: 0.15vh;
+}
+
+.last-win-amount {
+    font-size: 1.6vw;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: 'Fredoka One', Arial, sans-serif;
+    text-shadow: 0.08vw 0.08vw 0.15vw rgba(0, 0, 0, 0.8);
+}
+
+
+
+/* Control Buttons - Base (NO transforms) */
+.control-button {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    /* NO transition or transform here */
+}
+
+
+
+/* Bet Button Large - Completely Independent */
+.bet-button-large {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.bet-button-large:hover {
+    transform: scale(1.05);
+}
+
+.bet-button-large:active {
+    transform: scale(0.98);
+}
+
+/* Bet Background Image - Larger */
+.bet-bg-large {
+    width: 12vw;
+    height: 7vw;
+    max-width: 15vw;
+    max-height: 10vh;
+    object-fit: contain;
+}
+
+/* Bet Amount Text - Larger */
+.bet-amount-large {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.9vw;
+    font-weight: bold;
+    color: #fff;
+    font-family: 'Fredoka One', Arial, sans-serif;
+    text-shadow: 0.15vw 0.15vw 0.3vw rgba(0,0,0,0.8);
+    pointer-events: none;
+    white-space: nowrap;
+    text-align: center;
+}
+
+/* Minus Button - Completely Independent */
+.minus-button {
+    transition: transform 0.2s ease;
+}
+
+.minus-button:hover {
+    transform: scale(1.1);
+}
+
+.minus-button:active {
+    transform: scale(0.95);
+}
+
+/* Plus Button - Completely Independent */
+.plus-button {
+    transition: transform 0.2s ease;
+}
+
+.plus-button:hover {
+    transform: scale(1.1);
+}
+
+.plus-button:active {
+    transform: scale(0.95);
+}
+
+/* Win Button - Completely Independent */
+.win-button {
+    transition: transform 0.2s ease;
+}
+
+.win-button:hover {
+    transform: scale(1.03);
+}
+
+.win-button:active {
+    transform: scale(0.97);
+}
+
+/* Icon Buttons - Completely Independent */
+.icon-button {
+    transition: transform 0.2s ease;
+}
+
+.icon-button:hover {
+    transform: scale(1.1);
+}
+
+.icon-button:active {
+    transform: scale(0.9);
+}
+
+
+
+/* Bet button image - fixed width */
+.total-bet-button .button-image {
+    width: 8vw;
+    height: 5vw;
+    max-width: 10vw;
+    max-height: 7vh;
+    object-fit: stretch;
+}
+
+/* Other button images (spin, etc.) */
+.button-image {
+    width: 8vw;
+    height: auto;
+    max-width: 10vw;
+    object-fit: contain;
+}
+
+/* AutoPlay Popup Styling */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Fredoka One', Arial, sans-serif;
+    width: 80%;
+}
+
+.popup-text h3 {
+    font-size: 1.8em;
+    margin-bottom: 1em;
+    text-shadow: 0.15vw 0.15vw 0.3vw rgba(0, 0, 0, 0.8);
+}
+
+.autoplay-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    margin-top: 18vh;
+    margin-bottom: 2vh;
+}
+
+.autoplay-option {
+    background: linear-gradient(145deg, #2d5016, #3e6b1f);
+    border: 0.15vw solid #5a8c2a;
+    color: white;
+    width: 55vw;
+    width: 45vw;
+    padding: 1.6vh 0;
+    font-size: 2.8vh;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: 'Fredoka One', Arial, sans-serif;
+    border-radius: 0.6vw;
+    transition: all 0.2s ease;
+    text-shadow: 0.08vw 0.08vw 0.15vw rgba(0, 0, 0, 0.7);
+    text-align: center;
+}
+
+.autoplay-option:hover {
+    background: linear-gradient(145deg, #3e6b1f, #5a8c2a);
+    transform: translateY(-0.15vh);
+    box-shadow: 0 0.3vw 0.6vw rgba(0, 0, 0, 0.3);
+}
+
+.close-button {
+    position: absolute;
+    top: -1vh;
+    right: -8vw;
+    width: 6vw;
+    height: 6vw;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.close-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.close-button:hover .exit-normal {
+    display: none;
+}
+
+.close-button:hover .exit-hover {
+    display: block !important;
+}
+
+.autoplay-settings {
+    margin-top: 1vh;
+    padding-top: 2vh;
+    border-top: 0.1vh solid rgba(255, 255, 255, 0.3);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 2vw;
+    color: white;
+    font-size: 3.2vh;
+    cursor: pointer;
+    font-family: 'Fredoka One', Arial, sans-serif;
+}
+
+.custom-checkbox {
+    width: 5vw;
+    height: 5vw;
+    cursor: pointer;
+    position: relative;
+}
+
+.custom-checkbox img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.custom-checkbox:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+
+
+
+.bet-amount {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2vw;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0.15vw 0.15vw 0.3vw rgba(0,0,0,0.8);
+    pointer-events: none;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.lines-amount,
+.win-amount {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2vw;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0.15vw 0.15vw 0.3vw rgba(0,0,0,0.8);
+    pointer-events: none;
+}
+
+/* Button Labels */
+.button-label {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8vw;
+    font-weight: bold;
+    color: #ffd700;
+    font-family: 'Fredoka One', Arial, sans-serif;
+    text-shadow: 0.08vw 0.08vw 0.15vw rgba(0,0,0,0.8);
+    pointer-events: none;
+    text-transform: uppercase;
+}
+
+/* Bet Controls */
+.bet-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.1vw; /* Further reduced gap for tighter button placement */
+}
+
+.minus-button .button-image,
+.plus-button .button-image {
+    width: 4vw;
+    height: auto;
+    max-width: 5vw;
+    transition: all 0.2s ease;
+}
+
+.minus-button:hover .button-image,
+.plus-button:hover .button-image {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+/* Menu Icons */
+.menu-icons {
+    position: absolute;
+    top: 2vh;
+    right: 2vw;
+    display: flex;
+    gap: 1vw;
+    z-index: 200;
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.icon-button:hover {
+    transform: scale(1.1);
+}
+
+.icon-button img {
+    width: 3vw;
+    height: auto;
+    max-width: 3.6vw;
+}
+
+/* === UI Components === */
+
+/* Bonus Buy Popup System - Using Assets */
+.bonus-buy-popup {
+    position: relative;
+    display: inline-block;
+}
+
+.popup-exit-button {
+    position: absolute;
+    top: 1.2vw;
+    right: 1.2vw;
+    width: 5.5vw;
+    height: 5.5vw;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.bonus-title {
+    position: absolute;
+    top: 3.5999999999999996vw;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #FFD700;
+    font-size: 2.4vw;
+    font-weight: bold;
+    text-shadow: 0.15vw 0.15vw 0.3vw rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+.bonus-buy-content {
+    position: absolute;
+    top: 6.0vw;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24.0vw;
+    text-align: center;
+}
+
+
+
+.bonus-buy-popup h2 {
+    color: #FFD700;
+    margin-bottom: 1.6vw;
+    font-size: 1.92vw;
+    text-shadow: 0.15vw 0.15vw 0.3vw rgba(0, 0, 0, 0.8);
+}
+
+.bonus-bet-section {
+    margin-top: -3.0vw;
+    margin-bottom: 2.0vw;
+    padding: 1.2vw;
+}
+
+
+
+.bonus-bet-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2vw;
+}
+
+.bonus-bet-display {
+    background: rgba(255, 255, 255, 0.2);
+    border: 0.15vw solid #FFD700;
+    border-radius: 0.6vw;
+    padding: 0.64vw 1.6vw;
+    color: #FFD700;
+    font-weight: bold;
+    font-size: 1.44vw;
+    min-width: 6.0vw;
+    text-shadow: 0.08vw 0.08vw 0.15vw rgba(0, 0, 0, 0.8);
+}
+
+.bonus-options {
+    margin-top: 1.0vw;
+    margin-bottom: 1.6vw;
+}
+
+.bonus-option {
+    padding: 1.6vw;
+    margin-bottom: 1.2vw;
+}
+
+.bonus-option-content h3 {
+    color: #FFD700;
+    margin-bottom: 0.8vw;
+    font-size: 2.2vw;
+    text-shadow: 0.08vw 0.08vw 0.15vw rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+}
+
+.bonus-option-content p {
+    color: #ffffff;
+    margin-bottom: 1.2vw;
+    font-size: 1.8vw;
+    text-shadow: 0.08vw 0.08vw 0.15vw rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+}
+
+.bonus-cost {
+    font-size: 2.6vw;
+    color: #FFD700;
+    font-weight: bold;
+    margin-bottom: 1.2vw;
+    text-shadow: 0.15vw 0.15vw 0.3vw rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+}
+
+.bonus-purchase-btn {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+}
+
+.bonus-purchase-btn .button-bg {
+    width: 20.0vw;
+    height: 6.5vw;
+    display: block;
+}
+
+.bonus-purchase-btn .button-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8vw;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 0.08vw 0.08vw 0.15vw rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+}
+
+.bonus-purchase-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Bonus Buy Confirmation Popup - Using Assets */
+.confirmation-popup {
+    position: relative;
+    display: inline-block;
+}
+
+.confirmation-title {
+    position: absolute;
+    top: 4.0vw;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #FFD700;
+    font-size: 1.76vw;
+    font-weight: bold;
+    text-shadow: 0.15vw 0.15vw 0.3vw rgba(0, 0, 0, 0.8);
+    text-align: center;
+}
+
+.confirmation-content {
+    position: absolute;
+    top: 11.0vw;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 25.0vw;
+    text-align: center;
+}
+
+.confirmation-message {
+    margin-bottom: 1.6vw;
+}
+
+.confirmation-message p {
+    color: #ffffff;
+    font-size: 1.28vw;
+    margin-bottom: 0.2vw;
+    text-shadow: 0.08vw 0.08vw 0.15vw rgba(0, 0, 0, 0.8);
+}
+
+.bonus-name {
+    color: #FFD700 !important;
+    font-weight: bold;
+    font-size: 1.44vw !important;
+}
+
+#bonus-buy-cost {
+    color: #FFD700;
+    font-weight: bold;
+    font-size: 2.2vw;
+    text-shadow: 0.15vw 0.15vw 0.3vw rgba(0, 0, 0, 0.8);
+}
+
+.confirmation-details {
+    margin-bottom: 2.0vw;
+    padding: 1.2vw;
+}
+
+.confirmation-details p {
+    color: #ffffff;
+    font-size: 1.8vw;
+    text-shadow: 0.08vw 0.08vw 0.15vw rgba(0, 0, 0, 0.8);
+}
+
+.confirmation-buttons {
+    display: flex;
+    gap: 1.2vw;
+    justify-content: center;
+}
+
+.confirm-btn {
+    padding: 0.96vw 2.0vw;
+    border: 0.15vw solid;
+    border-radius: 0.6vw;
+    font-size: 1.28vw;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 0.08vw 0.08vw 0.15vw rgba(0, 0, 0, 0.8);
+}
+
+.purchase-btn {
+    background: linear-gradient(135deg, #228B22, #32CD32);
+    border-color: #FFD700;
+    color: #ffffff;
+}
+
+.purchase-btn:hover {
+    background: linear-gradient(135deg, #32CD32, #00FF00);
+    transform: scale(1.05);
+    box-shadow: 0 0 1.2vw rgba(50, 205, 50, 0.5);
+}
+
+.cancel-btn {
+    background: linear-gradient(135deg, #DC143C, #FF6347);
+    border-color: #FFD700;
+    color: #ffffff;
+}
+
+.cancel-btn:hover {
+    background: linear-gradient(135deg, #FF6347, #FF4500);
+    transform: scale(1.05);
+    box-shadow: 0 0 1.2vw rgba(220, 20, 60, 0.5);
+}
+
+/* Old win popup CSS removed - using themed popups now */
+
+/* Bonus Overlay */
+.bonus-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 20000;
+}
+
+.bonus-intro-content {
+    text-align: center;
+    color: #ffd700;
+}
+
+.bonus-intro-content h2 {
+    font-size: 5vh;
+    margin-bottom: 2vh;
+    text-shadow: 0.25vw 0.25vw 0.5vw rgba(0,0,0,0.8);
+    animation: pulseScale 2s infinite;
+}
+
+.bonus-intro-content div {
+    font-size: 2.5vh;
+    text-shadow: 0.15vw 0.15vw 0.3vw rgba(0,0,0,0.8);
+}
+
+/* Game Disclaimer */
+.game-disclaimer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    background: rgba(0,0,0,0.8);
+    color: #ccc;
+    font-size: 0.8vh;
+    padding: 0.5vh 2vw;
+    text-align: center;
+    z-index: 1;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+/* Pulse Scale Animation */
+@keyframes pulseScale {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.popup-close-button .close-hover {
+    display: none;
+}
+
+.popup-close-button:hover .close-normal {
+    display: none;
+}
+
+.popup-close-button:hover .close-hover {
+    display: block;
+}
+
+.popup-close-button img {
+    width: 4vw;
+    height: auto;
+    max-width: 3.5999999999999996vw;
+}
+
+/* Settings Controls */
+.settings-controls {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    z-index: 2;
+}
+
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2vh 0;
+    border-bottom: 0.08vw solid rgba(255,255,255,0.2);
+}
+
+.setting-label {
+    font-size: 2.5vw;
+    font-weight: bold;
+    color: #fff;
+}
+
+.toggle-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+.toggle-button:hover {
+    transform: scale(1.05);
+}
+
+.toggle-button img {
+    width: 6vw;
+    height: auto;
+    max-width: 5.3999999999999995vw;
+}
+
+.toggle-button .toggle-off {
+    display: none;
+}
+
+.toggle-button.off .toggle-on {
+    display: none;
+}
+
+.toggle-button.off .toggle-off {
+    display: block;
+}
+
+/* Message Text */
+.message-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    text-align: center;
+    font-size: 2.5vw;
+    font-weight: bold;
+    color: #fff;
+    z-index: 2;
+    word-wrap: break-word;
+}
+
+/* Mobile Support - Using unified mobile reel background */
+@media (max-width: 500px) and (min-height: 560px) {
+    
+    /* Mobile Game Container */
+    .game-container {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+    
+    /* Mobile Slot Machine - Vertical Layout */
+    .slot-machine {
+        width: 100vw;
+        height: 70vh; /* Reserve space for mobile controls */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* Mobile Game Header */
+    .game-header {
+        position: absolute;
+        top: 2vh;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 100;
+    }
+    
+    .main-logo {
+        width: 60vw;
+        height: auto;
+        max-width: 70vw;
+        object-fit: contain;
+    }
+    
+    /* Mobile Studio Logo - Bigger and Higher */
+    .studio-logo-container {
+        top: 40%; /* Move up from 50% */
+    }
+    
+    .loading-background .studio-logo {
+        width: 60vw; /* Bigger than desktop 45vw */
+        height: auto;
+        max-width: 85vw; /* Bigger than desktop 80vw */
+        object-fit: contain;
+    }
+    
+    /* Hide Desktop Fir Trees on Mobile */
+    .fir-trees-top,
+    .fir-trees-bottom {
+        display: none;
+    }
+    
+    /* Mobile Game Area */
+    .game-area {
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 95vw;
+        height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+    }
+    
+    /* Mobile Reel Section - Use unified background */
+    .reel-section {
+        position: relative;
+        width: 90vw;
+        height: 55vh;
+        background-image: url('./assets/mobile reel background.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Hide individual frame images on mobile */
+    .reel-section .frame-image {
+        display: none;
+    }
+    
+    /* Mobile Symbol Positioning - Calculated for unified background */
+    .symbol-display {
+        position: absolute;
+        width: 15vw !important; /* Bigger symbols */
+        height: 12vw !important; /* Taller containers */
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 10;
+    }
+    
+    /* Mobile Symbol Grid Positions - Based on unified background layout */
+    /* Reel 0 (leftmost) */
+    .symbol-display[data-pos="0-0"] { left: 9.5vw; top: 8vh; }   /* Top row - moved down more */
+    .symbol-display[data-pos="0-1"] { left: 9.5vw; top: 21vh; }  /* Middle row - moved down more */
+    .symbol-display[data-pos="0-2"] { left: 9.5vw; top: 34vh; }  /* Bottom row - moved down more */
+    
+    /* Reel 1 */
+    .symbol-display[data-pos="1-0"] { left: 26.5vw; top: 8vh; }
+    .symbol-display[data-pos="1-1"] { left: 26.5vw; top: 21vh; }
+    .symbol-display[data-pos="1-2"] { left: 26.5vw; top: 34vh; }
+    
+    /* Reel 2 (center) */
+    .symbol-display[data-pos="2-0"] { left: 42vw; top: 8vh; }
+    .symbol-display[data-pos="2-1"] { left: 42vw; top: 21vh; }
+    .symbol-display[data-pos="2-2"] { left: 42vw; top: 34vh; }
+    
+    /* Reel 3 */
+    .symbol-display[data-pos="3-0"] { left: 59vw; top: 8vh; }
+    .symbol-display[data-pos="3-1"] { left: 59vw; top: 21vh; }
+    .symbol-display[data-pos="3-2"] { left: 59vw; top: 34vh; }
+    
+    /* Reel 4 (rightmost) */
+    .symbol-display[data-pos="4-0"] { left: 75.75vw; top: 8vh; }
+    .symbol-display[data-pos="4-1"] { left: 75.75vw; top: 21vh; }
+    .symbol-display[data-pos="4-2"] { left: 75.75vw; top: 34vh; }
+    
+    /* Mobile Multiplier Overlay */
+    .multiplier-overlay {
+        width: 7vw; /* Bigger for larger symbols */
+        height: 7vw; /* Bigger for larger symbols */
+        font-size: 3.5vw; /* Bigger text */
+        top: -10px;
+        right: -10px;
+    }
+    
+    /* Mobile 4-Row UI Layout */
+    .unified-horizontal-ui {
+        position: fixed;
+        bottom: 1vh;
+        left: 1vw;
+        right: 1vw;
+        width: 98vw;
+        height: 40vh;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.5vh;
+        padding: 1vh;
+        transform: none;
+    }
+    
+    /* Mobile UI Rows */
+    .mobile-ui-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 8vh;
+        padding: 0 3vw;
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 1.5vh;
+        border: 2px solid rgba(255, 215, 0, 0.5);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Row 1: Balance and Bet */
+    .mobile-row-1 {
+        justify-content: space-between;
+    }
+    
+    .mobile-balance-section,
+    .mobile-bet-section {
+        display: flex;
+        align-items: center;
+        gap: 2vw;
+    }
+    
+    /* Mobile Bet Controls - Spread plus/minus buttons */
+    .mobile-row-2 .bet-controls-group {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 0;
+    }
+    
+    /* Mobile Action Buttons - Spread auto/turbo with spin centered */
+    .mobile-row-4 .action-buttons-group {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 0;
+    }
+    
+    /* Mobile AutoPlay Popup - Transparent background, bigger size */
+    .autoplay-background {
+        opacity: 0;
+        width: 90vw;
+        min-width: 85vw;
+        max-width: 95vw;
+    }
+    
+    /* Mobile Close/Exit Button - Much bigger */
+    .close-button {
+        width: 12vw;
+        height: 12vw;
+        top: -2vh;
+        right: -6vw;
+    }
+    
+    /* Mobile Checkboxes - Larger but not too big */
+    .custom-checkbox {
+        width: 12vw;
+        height: 12vw;
+    }
+    
+    /* Mobile Checkbox Labels - More spacing */
+    .checkbox-label {
+        gap: 4vw;
+    }
+    
+    /* Mobile Bet Amount Button - Disable clicking */
+    #total-bet-button {
+        pointer-events: none;
+        cursor: default;
+    }
+    
+    /* Mobile Volume Popup - SUPER BIG to test if changes are working */
+    .volume-popup {
+        min-width: 80vw;
+        padding: 8vw;
+        border-radius: 4vw;
+        bottom: 15vw;
+    }
+    
+    .volume-controls {
+        gap: 6vw;
+    }
+    
+    .volume-slider-group {
+        gap: 6vw;
+        font-size: 8vw;
+    }
+    
+    .volume-slider-group label,
+    .volume-slider-group span {
+        font-size: 8vw !important;
+    }
+    
+    /* Mobile Volume Sliders - SUPER THICK to test */
+    .volume-slider {
+        height: 4vw !important;
+        border-radius: 2vw !important;
+        -webkit-appearance: none !important;
+        appearance: none !important;
+    }
+    
+    .volume-slider::-webkit-slider-thumb {
+        width: 10vw !important;
+        height: 10vw !important;
+        -webkit-appearance: none !important;
+    }
+    
+    .volume-slider::-moz-range-thumb {
+        width: 10vw !important;
+        height: 10vw !important;
+    }
+    
+    /* Mobile Bonus Buy Popup - Force much larger background */
+    .bonus-buy-background {
+        width: 80vw !important;
+        min-width: 75vw !important;
+        max-width: 85vw !important;
+    }
+    
+    /* Mobile Bonus Buy Popup Elements - Much larger */
+    .bonus-buy-popup .popup-exit-button {
+        width: 12vw !important;
+        height: 12vw !important;
+        top: 2vw !important;
+        right: 2vw !important;
+    }
+    
+    .bonus-buy-content h3 {
+        font-size: 5vw !important;
+    }
+    
+    .bonus-buy-content p {
+        font-size: 4vw !important;
+    }
+    
+    .bonus-cost {
+        font-size: 6vw !important;
+    }
+    
+    .bonus-purchase-btn {
+        transform: scale(1.5) !important;
+    }
+    
+    /* Mobile Bonus Buy - Wider text content and moved down */
+    .bonus-buy-content {
+        width: 85% !important;
+        padding: 0 5vw !important;
+        margin-top: 5vw !important;
+    }
+    
+    /* Mobile Bonus Buy - ACTUALLY make bet selector bigger */
+    .bonus-bet-controls {
+        gap: 1.5vw !important;
+        transform: scale(2.5) !important;
+        margin-top: 4vw !important;
+    }
+    
+    .bonus-bet-section .bet-amount {
+        font-size: 6vw !important;
+        width: 20vw !important;
+        height: 8vw !important;
+    }
+    
+    .bonus-bet-section .control-button {
+        width: 8vw !important;
+        height: 8vw !important;
+    }
+    
+    .bonus-cost {
+        margin-bottom: 4vw !important;
+    }
+    
+    /* Mobile Confirmation Popup - Scale everything up proportionally */
+    .confirmation-background {
+        width: 80vw !important;
+        min-width: 75vw !important;
+        max-width: 85vw !important;
+    }
+    
+    .confirmation-popup .popup-exit-button {
+        width: 12vw !important;
+        height: 12vw !important;
+        top: 2vw !important;
+        right: 2vw !important;
+    }
+    
+    .confirmation-content {
+        top: 35vw !important;
+        width: 45vw !important;
+        transform: translateX(-50%) scale(2.2) !important;
+    }
+    
+    /* Mobile Confirmation - Fix specific text and button sizes */
+    .confirmation-message {
+        font-size: 7vw !important;
+        line-height: 1.2 !important;
+    }
+    
+    .confirmation-details {
+        font-size: 4vw !important;
+        width: 70% !important;
+        margin: 0 auto !important;
+    }
+    
+    .confirmation-buttons .confirm-btn {
+        transform: scale(1.2) !important;
+        margin: 0 1vw !important;
+    }
+    
+    /* Mobile Bonus Summary Popup - Bigger text and moved down */
+    .themed-win-content {
+        padding-top: 15vw !important;
+    }
+    
+    .themed-win-amount {
+        font-size: 8vw !important;
+    }
+    
+    .themed-win-content h2 {
+        font-size: 6vw !important;
+    }
+    
+    .themed-win-content p {
+        font-size: 4vw !important;
+    }
+    
+    /* Mobile Info Popup - Hide background and widen content */
+    .info-popup-bg {
+        display: none !important;
+    }
+    
+    .info-content {
+        left: 5vw !important;
+        right: 5vw !important;
+        top: 18vw !important;
+        font-size: 6vw !important;
+    }
+    
+    .info-content h2 {
+        font-size: 8vw !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.9) !important;
+    }
+    
+    .info-content h3 {
+        font-size: 7vw !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.9) !important;
+    }
+    
+    .info-content p {
+        font-size: 6vw !important;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.9) !important;
+    }
+    
+    /* Mobile Info Tabs - Moderately bigger */
+    .info-tab {
+        font-size: 3.5vw !important;
+        padding: 2vw 4vw !important;
+        border-width: 0.5vw !important;
+    }
+    
+    /* Mobile Info Close Button - Much bigger for touch */
+    .info-close-btn {
+        width: 12vw !important;
+        height: 12vw !important;
+        top: 2vw !important;
+        right: 0.5vw !important;
+    }
+    
+    /* Mobile Info Content - All text elements bigger */
+    .info-content .symbol-item {
+        font-size: 5vw !important;
+    }
+    
+    .info-content .symbol-name {
+        font-size: 5.5vw !important;
+    }
+    
+    .info-content .symbol-value {
+        font-size: 4.5vw !important;
+    }
+    
+    .info-content div,
+    .info-content span {
+        font-size: 5vw !important;
+    }
+    
+    /* Mobile Win Lines Tab - Match symbols text size */
+    #paylines-tab h3 {
+        font-size: 5.5vw !important;
+    }
+    
+    #paylines-tab h4 {
+        font-size: 5vw !important;
+    }
+    
+    #paylines-tab li {
+        font-size: 5vw !important;
+    }
+    
+    /* Mobile Rules Tab - Match symbols text size */
+    #rules-tab h3 {
+        font-size: 5.5vw !important;
+    }
+    
+    #rules-tab h4 {
+        font-size: 5vw !important;
+    }
+    
+    #rules-tab li {
+        font-size: 5vw !important;
+    }
+    
+    /* Row 2: Turbo and Bonus */
+    .mobile-row-2 {
+        justify-content: space-around;
+    }
+    
+    /* Row 3: Win, Info, Sound */
+    .mobile-row-3 {
+        justify-content: space-between;
+    }
+    
+    .mobile-win-section {
+        flex: 1;
+    }
+    
+    .mobile-info-sound {
+        display: flex;
+        gap: 3vw;
+    }
+    
+    /* Row 4: Play and Auto */
+    .mobile-row-4 {
+        justify-content: space-around;
+    }
+    
+    /* Mobile Button Sizing - Much Larger */
+    .mobile-ui-row .control-button {
+        width: 20vw;
+        height: 7vh;
+        min-width: 18vw;
+        min-height: 6vh;
+    }
+    
+    .mobile-ui-row .button-bg,
+    .mobile-ui-row .button-image {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: fill !important; /* Stretch to fill container */
+        max-width: none !important;
+        max-height: none !important;
+    }
+    
+    .mobile-ui-row .button-text {
+        font-size: 4vw;
+        font-weight: bold;
+        color: #ffffff !important; /* Force white text like BONUS */
+        font-family: 'Fredoka One', Arial, sans-serif !important; /* Match theme font */
+        text-shadow: 0.15vw 0.15vw 0.3vw rgba(0, 0, 0, 0.8) !important; /* Match theme shadow */
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        z-index: 20 !important;
+    }
+    
+    /* Mobile Balance/Bet Display Sizing - Much Larger */
+    .mobile-ui-row .balance-background,
+    .mobile-ui-row .bet-bg-large {
+        width: 35vw !important;
+        height: 7vh !important;
+        object-fit: fill !important; /* Stretch to fill - ignore aspect ratio */
+        max-width: none !important;
+        max-height: none !important;
+    }
+    
+    .mobile-ui-row .balance-amount,
+    .mobile-ui-row .bet-amount-large {
+        font-size: 4vw;
+        font-weight: bold;
+    }
+    
+    .mobile-ui-row .balance-label {
+        font-size: 3.5vw; /* Larger text */
+        position: relative;
+        top: -2.5vh; /* Move up much more */
+    }
+    
+    .mobile-ui-row .button-label {
+        font-size: 3vw;
+        display: none; /* Hide the original BET text */
+    }
+    
+    /* New separate PLAY AMOUNT label for bet section */
+    .mobile-bet-amount-label {
+        position: absolute;
+        top: -0.3vh; /* Move up slightly more */
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 3vw;
+        font-weight: bold;
+        color: #ffffff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        font-family: 'Fredoka One', Arial, sans-serif;
+        pointer-events: none;
+        z-index: 10;
+    }
+    
+    /* Mobile Win Display - Larger */
+    .mobile-ui-row .last-win-background {
+        width: 30vw !important;
+        height: 7vh !important;
+        object-fit: fill !important; /* Stretch to fill */
+        max-width: none !important;
+        max-height: none !important;
+    }
+    
+    /* Manual positioning for WIN container - move left and bigger text */
+    .mobile-ui-row .last-win-content {
+        position: absolute !important;
+        top: 40% !important; /* Moved up from 50% */
+        left: 35% !important; /* Move left from center */
+        transform: translate(-50%, -50%) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        z-index: 20 !important;
+        pointer-events: none !important;
+    }
+    
+    .mobile-ui-row .last-win-label {
+        font-size: 3.2vw; /* Bigger text */
+        font-weight: bold;
+        color: #ffffff !important;
+        font-family: 'Fredoka One', Arial, sans-serif !important;
+        text-shadow: 0.15vw 0.15vw 0.3vw rgba(0, 0, 0, 0.8) !important;
+        margin-bottom: 0.2vh;
+    }
+    
+    .mobile-ui-row .last-win-amount {
+        font-size: 4vw; /* Bigger numbers */
+        font-weight: bold;
+        color: #ffffff !important;
+        font-family: 'Fredoka One', Arial, sans-serif !important;
+        text-shadow: 0.15vw 0.15vw 0.3vw rgba(0, 0, 0, 0.8) !important;
+    }
+    
+    /* Mobile Info/Sound Buttons - Larger */
+    .mobile-info-sound .info-button,
+    .mobile-info-sound .sound-button {
+        width: 8vw;
+        height: 6vh;
+    }
+    
+    .mobile-info-sound .button-icon {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: fill !important; /* Stretch icon to fill button */
+        max-width: none !important;
+        max-height: none !important;
+    }
+    
+    /* Mobile Bet Controls - Larger Plus/Minus buttons */
+    .mobile-bet-section .minus-button,
+    .mobile-bet-section .plus-button {
+        width: 8vw;
+        height: 7vh;
+    }
+    
+    .mobile-bet-section .minus-button .button-image,
+    .mobile-bet-section .plus-button .button-image {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: fill !important; /* Stretch plus/minus icons */
+        max-width: none !important;
+        max-height: none !important;
+    }
+    
+}
+
+
+
+/* Small Win Popup (Christmas themed, doesn't interrupt gameplay) */
+.small-win-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 1500;
+    opacity: 0;
+    transition: all 0.3s ease-out;
+    pointer-events: none; /* Doesn't block clicks/gameplay */
+}
+
+.small-win-popup.show {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+.small-win-popup.fade-out {
+    transform: translate(-50%, -60%) scale(0.8);
+    opacity: 0;
+}
+
+.small-win-amount {
+    background: linear-gradient(45deg, #FFD700, #FFA500, #FF6B35);
+    color: #0d4f3c;
+    font-size: 3rem;
+    font-weight: bold;
+    padding: 1.6vw 3.2vw;
+    border-radius: 1.2vw;
+    border: 0.2vw solid #FFFF00;
+    box-shadow: 0 0 2.2vw rgba(255, 215, 0, 0.8), 0 0 1.2vw rgba(255, 107, 53, 0.6);
+    text-shadow: 0.15vw 0.15vw 0.3vw rgba(0, 0, 0, 0.3);
+    animation: christmasWinPulse 0.6s ease-in-out;
+}
+
+@keyframes christmasWinPulse {
+    0% { 
+        transform: scale(0.8); 
+        box-shadow: 0 0 1.6vw rgba(255, 215, 0, 0.6);
+    }
+    50% { 
+        transform: scale(1.2); 
+        box-shadow: 0 0 3.2vw rgba(255, 215, 0, 1), 0 0 1.6vw rgba(255, 107, 53, 0.8);
+    }
+    100% { 
+        transform: scale(1); 
+        box-shadow: 0 0 2.2vw rgba(255, 215, 0, 0.8), 0 0 1.2vw rgba(255, 107, 53, 0.6);
+    }
+}
+
+
+
+
+
+/* Themed Win Popup - Clean asset-only display */
+.themed-win-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    border-radius: 1vw;
+    padding: 2vw;
+    text-align: center;
+    z-index: 1000;
+    font-family: 'Fredoka One', Arial, sans-serif;
+    color: #000;
+    opacity: 0;
+    transition: all 0.3s ease;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Size controlled by JavaScript for flexibility */
+}
+
+.themed-win-popup.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.themed-win-popup.fade-out {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+}
+
+.themed-win-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.themed-win-amount {
+    font-size: 2.5vw;
+    font-weight: bold;
+    text-shadow: 0.2vw 0.2vw 0.4vw rgba(0, 0, 0, 0.8);
+    color: #FFD700;
+    margin: 0;
+}
+
+/* Win Type Size Classes */
+.win-size-jackpot {
+    width: 70vw;
+    height: 45vh;
+    font-size: 3.5vw;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.win-size-mega {
+    width: 70vw;
+    height: 45vh;
+    font-size: 3.2vw;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.win-size-huge {
+    width: 70vw;
+    height: 45vh;
+    font-size: 3.0vw;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.win-size-big {
+    width: 70vw;
+    height: 45vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Win Text Size Classes */
+.win-text-jackpot {
+    font-size: 3.5vw;
+}
+
+.win-text-mega {
+    font-size: 3.2vw;
+}
+
+.win-text-huge {
+    font-size: 3.0vw;
+}
+
+.win-text-big {
+    font-size: 2.8vw;
+}
+
+/* ==========================================
+   SPECIFIC POPUP BACKGROUND CLASSES
+   ========================================== */
+
+/* AutoPlay Popup Background - Made bigger for Element #15 */
+.autoplay-background {
+    width: 60vw;
+    min-width: 40.0vw;
+    max-width: 56.0vw;
+    height: auto;
+}
+
+/* Bonus Buy Popup Background */
+.bonus-buy-background {
+    width: 45vw;
+    min-width: 28.0vw;
+    max-width: 42.0vw;
+    height: auto;
+}
+
+/* Breathing animation for win amounts */
+.breathing-text {
+    animation: breathe 2s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+/* INFO and SOUND Button Containers */
+.info-button-container,
+.sound-button-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: 0; /* No extra margin - spacing controlled by bonus container */
+}
+
+.sound-button-container {
+    margin-left: 0.5vw; /* Small gap between info and sound */
+}
+
+.info-button,
+.sound-button {
+    width: 4vw;
+    height: 4vw;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5vw;
+    transition: all 0.3s ease;
+}
+
+.info-button:hover,
+.sound-button:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+.button-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Bet Selection Modal */
+.bet-selection-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.bet-modal-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bet-modal-container .popup-background {
+    position: relative;
+}
+
+.bet-modal-container .popup-bg-image {
+    width: 60vw;
+    height: auto;
+    max-width: 80vw;
+    object-fit: contain;
+}
+
+.bet-modal-container .popup-content {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.bet-modal-container .popup-title h3 {
+    font-size: 3.5vh;
+    color: #FFD700;
+    font-family: 'Fredoka One', Arial, sans-serif;
+    text-shadow: 0.15vw 0.15vw 0.3vw rgba(0, 0, 0, 0.8);
+    margin-bottom: 3vh;
+}
+
+.bet-modal-container .close-button {
+    position: absolute;
+    top: -2vh;
+    right: -3vw;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.bet-modal-container .close-btn-img {
+    width: 6vw;
+    height: 6vw;
+    object-fit: contain;
+}
+
+.bet-options-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5vw;
+    width: 100%;
+    max-height: 55vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1vh;
+    scrollbar-width: thin;
+    scrollbar-color: #FFD700 transparent;
+}
+
+.bet-option-button {
+    position: relative;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bet-option-button:hover {
+    transform: scale(1.05);
+}
+
+.bet-option-button:active {
+    transform: scale(0.98);
+}
+
+.bet-option-button.current-bet {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+.bet-option-bg {
+    width: 12vw;
+    height: 8vh;
+    object-fit: contain;
+}
+
+.bet-option-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.8vh;
+    font-weight: bold;
+    color: #fff;
+    font-family: 'Fredoka One', Arial, sans-serif;
+    text-shadow: 0.1vw 0.1vw 0.2vw rgba(0, 0, 0, 0.8);
+    pointer-events: none;
+}
+
+/* Custom Christmas-themed scrollbar for bet options grid */
+.bet-options-grid::-webkit-scrollbar {
+    width: 12px;
+}
+
+.bet-options-grid::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.bet-options-grid::-webkit-scrollbar-thumb {
+    background-image: url('./assets/Scroll Bar Roller.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 6px;
+    border: 1px solid #FFD700;
+}
+
+.bet-options-grid::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 215, 0, 0.3);
+}
+
+.bet-options-grid::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+/* Volume Popup */
+.volume-popup {
+    position: absolute;
+    bottom: 5vw;
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid #FFD700;
+    border-radius: 1vw;
+    padding: 1.5vw;
+    z-index: 1000;
+    min-width: 15vw;
+    box-shadow: 0 0.5vw 2vw rgba(0, 0, 0, 0.5);
+}
+
+.volume-popup.hidden {
+    display: none;
+}
+
+.volume-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+
+.volume-slider-group {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    color: #FFD700;
+    font-family: 'Fredoka One', Arial, sans-serif;
+    font-size: 1.2vw;
+}
+
+.volume-slider {
+    flex: 1;
+    height: 0.5vw;
+    background: #333;
+    border-radius: 0.25vw;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 1.5vw;
+    height: 1.5vw;
+    background: #FFD700;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 1.5vw;
+    height: 1.5vw;
+    background: #FFD700;
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+}
+
+/* Game Info Popup */
+.info-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.game-info-container {
+    position: relative;
+    width: 85vw;
+    height: 85vh;
+    max-width: 1000px;
+    max-height: 700px;
+}
+
+.info-popup-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.info-close-btn {
+    position: absolute;
+    top: 1.5vw;
+    right: 16vw;
+    width: 5vw;
+    height: 5vw;
+    cursor: pointer;
+    z-index: 2001;
+}
+
+.info-close-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.info-tabs {
+    position: absolute;
+    top: 6vw;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1.5vw;
+    z-index: 2001;
+}
+
+.info-tab {
+    background: rgba(0, 0, 0, 0.8);
+    color: #FFD700;
+    border: 2px solid #FFD700;
+    border-radius: 1vw;
+    padding: 1.2vw 2.5vw;
+    font-family: 'Fredoka One', Arial, sans-serif;
+    font-size: 1.8vw;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.info-tab:hover,
+.info-tab.active {
+    background: #FFD700;
+    color: #000;
+    transform: scale(1.05);
+}
+
+.info-content {
+    position: absolute;
+    top: 16vw;
+    left: 22vw;
+    right: 22vw;
+    bottom: 3vw;
+    overflow-y: auto;
+    z-index: 2001;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 1vw;
+    padding: 1.5vw;
+    color: #FFF;
+    font-family: 'Fredoka One', Arial, sans-serif;
+    border: 2px solid #FFD700;
+    scrollbar-width: thin;
+    scrollbar-color: #FFD700 transparent;
+}
+
+/* Custom Christmas-themed scrollbar for WebKit browsers */
+.info-content::-webkit-scrollbar {
+    width: 12px;
+}
+
+.info-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.info-content::-webkit-scrollbar-thumb {
+    background-image: url('./assets/Scroll Bar Roller.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 6px;
+    border: 1px solid #FFD700;
+}
+
+.info-content::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 215, 0, 0.3);
+}
+
+.info-content::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+.info-tab-content {
+    display: none;
+}
+
+.info-tab-content.active {
+    display: block;
+}
+
+.info-tab-content h3 {
+    color: #FFD700;
+    font-size: 3vw;
+    margin-bottom: 2.5vw;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.info-tab-content h4 {
+    color: #FFD700;
+    font-size: 2.2vw;
+    margin: 2vw 0 1.5vw 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Symbol Grid */
+.symbol-grid-christmas {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    width: 100%;
+    max-width: 100%;
+}
+
+.symbol-row {
+    display: flex;
+    align-items: center;
+    gap: 2vw;
+    padding: 0.8vw;
+    border-radius: 0.8vw;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    min-height: 13vw;
+    max-width: 100%;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.symbol-row.wild {
+    background: rgba(255, 215, 0, 0.2);
+}
+
+.symbol-row.scatter {
+    background: rgba(255, 100, 100, 0.2);
+}
+
+.symbol-row.premium {
+    background: rgba(100, 255, 100, 0.2);
+}
+
+.symbol-row.standard {
+    background: rgba(100, 100, 255, 0.2);
+}
+
+.symbol-img {
+    width: 12vw;
+    height: 12vw;
+    object-fit: contain;
+    border-radius: 0.5vw;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    flex-shrink: 0;
+}
+
+.symbol-info {
+    flex: 1;
+    padding-left: 2vw;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.symbol-name {
+    font-size: 3vw;
+    color: #FFD700;
+    font-weight: bold;
+    margin-bottom: 0.5vw;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.symbol-desc,
+.symbol-pays {
+    font-size: 2.2vw;
+    color: #FFF;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
+    line-height: 1.3;
+    word-wrap: break-word;
+}
+
+/* Payline Info */
+.payline-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+    align-items: center;
+    width: 100%;
+}
+
+.payline-graphic {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 0.5vw;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+.payline-details {
+    width: 100%;
+    padding: 0;
+}
+
+.payline-details ul {
+    list-style: none;
+    padding: 0;
+}
+
+.payline-details li {
+    margin: 1.5vw 0;
+    font-size: 1.6vw;
+    padding-left: 2vw;
+    position: relative;
+    line-height: 1.4;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
+}
+
+.payline-details li:before {
+    content: "•";
+    position: absolute;
+    left: 0.5vw;
+    font-size: 1.4vw;
+    color: #FFD700;
+}
+
+/* Rules Content */
+.rules-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+}
+
+.rules-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.rules-section li {
+    margin: 1.2vw 0;
+    font-size: 1.5vw;
+    padding-left: 2vw;
+    position: relative;
+    line-height: 1.4;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
+}
+
+.rules-section li:before {
+    content: "•";
+    position: absolute;
+    left: 0.5vw;
+    font-size: 1.3vw;
+    color: #FFD700;
+}
+
+.notice-text {
+    background: rgba(255, 215, 0, 0.15);
+    border: 2px solid #FFD700;
+    border-radius: 0.8vw;
+    padding: 2vw;
+    margin-top: 1.5vw;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.notice-text p {
+    font-size: 1.3vw;
+    line-height: 1.5;
+    margin: 0;
+    color: #EEE;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.6);
+}
+
+/* Confirmation Popup Background */
+.confirmation-background {
+    width: 45vw;
+    min-width: 28.0vw;
+    max-width: 42.0vw;
+    height: auto;
+}
+
+/* =====================================================
+   REPLAY MODE STYLES
+   ===================================================== */
+
+/* Replay Mode Indicator */
+.replay-indicator {
+    position: absolute;
+    top: 5vh;
+    left: 15vw;
+    background: linear-gradient(145deg, #0066cc, #004499);
+    color: white;
+    padding: 1vmin 2vmin;
+    border-radius: 1vmin;
+    font-size: 2.5vmin;
+    font-weight: bold;
+    z-index: 1000;
+    border: 2px solid #0088ff;
+    box-shadow: 0 0.5vmin 1vmin rgba(0, 100, 200, 0.5);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Replay Bet Information Panel */
+.replay-bet-info {
+    /* Positioning handled via JavaScript for precise control */
+}
+
+/* Hide elements in replay mode */
+body.replay-mode #bonus-buy-button,
+body.replay-mode #auto-play-button,
+body.replay-mode #turbo-button,
+body.replay-mode #bet-up,
+body.replay-mode #bet-down,
+body.replay-mode #balance-section,
+body.replay-mode #auto-button,
+body.replay-mode .auto-button,
+body.replay-mode .autoplay-button,
+body.replay-mode #autoplay-button,
+body.replay-mode [id*="auto"],
+body.replay-mode [class*="auto"] {
+    display: none !important;
+}
+
+/* Show replay elements only in replay mode */
+body.replay-mode .replay-indicator {
+    display: block !important;
+}
+
+body.replay-mode .replay-bet-info {
+    display: block !important;
+}
+
+/* Play Again Button */
+.replay-again-button {
+    position: absolute;
+    bottom: 15vh;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.play-again-btn {
+    background: linear-gradient(145deg, #ffd700, #ffed4a);
+    border: 3px solid #b8860b;
+    color: #8b4513;
+    font-size: 3vmin;
+    font-weight: bold;
+    padding: 2vmin 4vmin;
+    border-radius: 1.5vmin;
+    cursor: pointer;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0.5vmin 1vmin rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+    min-width: 20vmin;
+    text-align: center;
+}
+
+.play-again-btn:hover {
+    background: linear-gradient(145deg, #ffed4a, #ffd700);
+    transform: scale(1.05);
+    box-shadow: 0 0.7vmin 1.4vmin rgba(0, 0, 0, 0.4);
+}
+
+.play-again-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 0.3vmin 0.6vmin rgba(0, 0, 0, 0.3);
+}
+
+/* Replay mode spin button styling */
+body.replay-mode #spin-button {
+    background: linear-gradient(145deg, #28a745, #20c997) !important;
+    border: 3px solid #1e7e34 !important;
+    color: white !important;
+    font-weight: bold !important;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5) !important;
+    box-shadow: 0 0.5vmin 1vmin rgba(40, 167, 69, 0.4) !important;
+    transition: all 0.2s ease !important;
+}
+
+body.replay-mode #spin-button:hover:not(:disabled) {
+    background: linear-gradient(145deg, #20c997, #28a745) !important;
+    transform: scale(1.02) !important;
+    box-shadow: 0 0.7vmin 1.4vmin rgba(40, 167, 69, 0.6) !important;
+}
+
+body.replay-mode #spin-button:disabled {
+    background: linear-gradient(145deg, #6c757d, #495057) !important;
+    border-color: #495057 !important;
+    opacity: 0.8 !important;
+}
+
+/* Mobile responsive adjustments for replay mode */
+@media (max-width: 500px) and (min-height: 560px) {
+    .replay-indicator {
+        font-size: 4vmin;
+        padding: 2vmin 3vmin;
+        top: 3vh;
+        left: 10vw;
+    }
+    
+    .replay-bet-info {
+        font-size: 3.5vmin !important;
+        max-width: 40vw !important;
+    }
+    
+    .play-again-btn {
+        font-size: 5vmin;
+        padding: 3vmin 6vmin;
+        min-width: 30vmin;
+    }
+    
+    .replay-again-button {
+        bottom: 10vh;
+    }
+}
