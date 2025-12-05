@@ -4920,6 +4920,7 @@ async function initializeGame() {
             setupEventListeners();
             updateBalanceDisplay();
             updateBetDisplay();
+            updateWinDisplay();
             updateSpinButton();
             
             // Display initial symbols on game load
