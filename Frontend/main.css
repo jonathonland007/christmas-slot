@@ -51,11 +51,11 @@ body {
     z-index: 10002;
 }
 
-/* Studio Logo - Loading Screen */
+/* Studio Logo - Loading Screen - Fullscreen */
 .loading-background .studio-logo {
-    width: 45vw;
-    height: auto;
-    max-width: 80vw;
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
     object-fit: contain;
     opacity: 1;
     transform: scale(1);
