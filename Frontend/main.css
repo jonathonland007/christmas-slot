@@ -49,6 +49,9 @@ body {
     animation: fadeIn 1s ease-in forwards;
     transition: opacity 3s ease-in-out;
     z-index: 10002;
+    background: #000000;
+    width: 100vw;
+    height: 100vh;
 }
 
 /* Studio Logo - Loading Screen - Fullscreen */
